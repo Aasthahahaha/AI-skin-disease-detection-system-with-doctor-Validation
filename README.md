@@ -104,3 +104,4 @@ This is a **prototype/demo** for educational purposes only. The AI predictions a
 
 Educational Project - Final Year Engineering Project
 
+# AI-skin-disease-detection-system-with-doctor-Validation

@@ -1,0 +1,27 @@
+{
+    "user1": {
+        "password": "123",
+        "role": "User",
+        "email": "user1@example.com",
+        "created_at": "2024-01-01T00:00:00"
+    },
+    "doctor1": {
+        "password": "123",
+        "role": "Doctor",
+        "email": "doctor1@example.com",
+        "created_at": "2024-01-01T00:00:00"
+    },
+    "user2": {
+        "password": "123",
+        "role": "User",
+        "email": "user2@example.com",
+        "created_at": "2024-01-01T00:00:00"
+    },
+    "doctor2": {
+        "password": "123",
+        "role": "Doctor",
+        "email": "doctor2@example.com",
+        "created_at": "2024-01-01T00:00:00"
+    }
+}
+

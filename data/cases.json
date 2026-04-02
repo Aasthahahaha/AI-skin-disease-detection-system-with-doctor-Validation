@@ -1,0 +1,55 @@
+[
+    {
+        "user": "user",
+        "image": "uploads/user_20260204_222346_7FCF3784-FB71-49C2-B081-5D73593D4128.jpeg",
+        "ai_result": "Contact Dermatitis",
+        "confidence": "70.69%",
+        "doctor_verified": true,
+        "doctor_notes": "nice",
+        "doctor_name": "teacher",
+        "date": "2026-02-04T22:23:46.745565",
+        "status": "approved",
+        "ai_agreed": true,
+        "correct_diagnosis": "Contact Dermatitis",
+        "verified_at": "2026-02-04T22:27:15.344423"
+    },
+    {
+        "user": "user",
+        "image": "uploads/user_20260206_001513_7FCF3784-FB71-49C2-B081-5D73593D4128.jpeg",
+        "ai_result": "Dermatitis",
+        "confidence": "87.94%",
+        "doctor_verified": true,
+        "doctor_notes": "nicee",
+        "doctor_name": "doctor",
+        "date": "2026-02-06T00:15:13.248500",
+        "status": "approved",
+        "ai_agreed": true,
+        "correct_diagnosis": "Dermatitis",
+        "verified_at": "2026-02-11T10:04:48.936611"
+    },
+    {
+        "user": "neha",
+        "image": "uploads/neha_20260206_130942_75C74F60-12A4-4DDF-B593-9C3539C18BA3.jpeg",
+        "ai_result": "Vitiligo",
+        "confidence": "61.6%",
+        "doctor_verified": true,
+        "doctor_notes": "approved",
+        "doctor_name": "doctor",
+        "date": "2026-02-06T13:09:42.665610",
+        "status": "approved",
+        "ai_agreed": true,
+        "correct_diagnosis": "Vitiligo",
+        "verified_at": "2026-02-06T13:13:31.489323"
+    },
+    {
+        "user": "user",
+        "image": "uploads/user_20260211_100109_B1714A28-1DF2-48B5-8310-4CC902214867.jpeg",
+        "ai_result": "Contact Dermatitis",
+        "confidence": "69.88%",
+        "doctor_verified": false,
+        "doctor_notes": "",
+        "doctor_name": "",
+        "date": "2026-02-11T10:01:09.041787",
+        "status": "pending"
+    }
+]

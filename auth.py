@@ -1,8 +1,8 @@
 """
 Authentication Module
 
-Handles user login, registration, logout, and password reset functionality.
-Manages session state and user credentials stored in JSON format.
+Handles user login, registration, logout, and password reset.
+Seeds extra accounts on first run.
 """
 
 import streamlit as st
@@ -10,302 +10,211 @@ import json
 import os
 from datetime import datetime
 
-# File paths for data storage
 USERS_FILE = "data/users.json"
 
+
 def ensure_users_file():
-    """
-    Create users.json file if it doesn't exist.
-    Initializes with default test accounts.
-    """
     if not os.path.exists(USERS_FILE):
-        # Create data directory if it doesn't exist
         os.makedirs("data", exist_ok=True)
-        
-        # Initialize with default users
         default_users = {
-            "user1": {
-                "password": "123",
-                "role": "User",
-                "email": "user1@example.com",
-                "created_at": datetime.now().isoformat()
-            },
-            "doctor1": {
-                "password": "123",
-                "role": "Doctor",
-                "email": "doctor1@example.com",
-                "created_at": datetime.now().isoformat()
-            },
-            "user2": {
-                "password": "123",
-                "role": "User",
-                "email": "user2@example.com",
-                "created_at": datetime.now().isoformat()
-            },
-            "doctor2": {
-                "password": "123",
-                "role": "Doctor",
-                "email": "doctor2@example.com",
-                "created_at": datetime.now().isoformat()
-            }
+            "user1": {"password": "123", "role": "User", "email": "user1@example.com", "created_at": datetime.now().isoformat()},
+            "user2": {"password": "123", "role": "User", "email": "user2@example.com", "created_at": datetime.now().isoformat()},
+            "doctor1": {"password": "123", "role": "Doctor", "email": "doctor1@mediscan.ai", "created_at": datetime.now().isoformat()},
+            "doctor3": {"password": "123", "role": "Doctor", "email": "doctor3@mediscan.ai", "created_at": datetime.now().isoformat()},
         }
-        
         with open(USERS_FILE, "w") as f:
             json.dump(default_users, f, indent=4)
 
+
 def load_users():
-    """
-    Load all users from the JSON file.
-    
-    Returns:
-        dict: Dictionary containing user credentials and information
-    """
-    ensure_users_file()  # Ensure file exists
+    ensure_users_file()
     try:
         with open(USERS_FILE, "r") as f:
             return json.load(f)
     except FileNotFoundError:
         return {}
     except json.JSONDecodeError:
-        st.error("Error reading users file. Please contact administrator.")
+        st.error("Error reading users file.")
         return {}
 
+
 def save_users(users):
-    """
-    Save users dictionary to JSON file.
-    
-    Args:
-        users (dict): Dictionary of users to save
-    """
     with open(USERS_FILE, "w") as f:
         json.dump(users, f, indent=4)
 
-def register_user(username, password, email, role="User"):
-    """
-    Register a new user.
-    
-    Args:
-        username (str): Unique username
-        password (str): User password
-        email (str): User email address
-        role (str): User role (User or Doctor)
-    
-    Returns:
-        tuple: (success: bool, message: str)
-    """
+
+def register_user(username, password, email, role="User", display_name="", specialization="", city="", area="", hospital="", bio=""):
     users = load_users()
-    
-    # Check if username already exists
     if username in users:
-        return False, "Username already exists. Please choose a different username."
-    
-    # Validate username
+        return False, "Username already exists."
     if len(username) < 3:
-        return False, "Username must be at least 3 characters long."
-    
-    # Validate password
+        return False, "Username too short (min 3)."
     if len(password) < 4:
-        return False, "Password must be at least 4 characters long."
-    
-    # Validate email format
+        return False, "Password too short (min 4)."
     if "@" not in email or "." not in email:
-        return False, "Please enter a valid email address."
-    
-    # Add new user
+        return False, "Invalid email address."
+
     users[username] = {
         "password": password,
         "role": role,
         "email": email,
         "created_at": datetime.now().isoformat()
     }
-    
     save_users(users)
-    return True, "Registration successful! You can now login."
 
-def reset_password(username, new_password):
-    """
-    Reset user's password.
-    
-    Args:
-        username (str): Username to reset password for
-        new_password (str): New password
-    
-    Returns:
-        tuple: (success: bool, message: str)
-    """
-    users = load_users()
-    
-    # Check if username exists
-    if username not in users:
-        return False, "Username not found."
-    
-    # Validate new password
-    if len(new_password) < 4:
-        return False, "Password must be at least 4 characters long."
-    
-    # Update password
-    users[username]["password"] = new_password
-    save_users(users)
-    
-    return True, "Password reset successfully! You can now login with your new password."
+    if role == "Doctor":
+        from database import register_doctor_profile
+        register_doctor_profile(username, display_name=display_name or f"Dr. {username.title()}", specialization=specialization, city=city, area=area, hospital=hospital, bio=bio)
+
+    return True, "Registration successful! You can now log in."
+
+
+def toggle_theme():
+    st.session_state["theme"] = "light" if st.session_state.get("theme", "dark") == "dark" else "dark"
 
 def login():
-    """
-    Display login form and handle authentication.
-    
-    This function creates a clean login interface with:
-    - Username and password fields only
-    - Automatic role detection from users.json
-    - New user registration option
-    - Password reset option
-    """
-    
-    # Ensure users file exists
     ensure_users_file()
-    
-    st.title("🏥 Skin Disease Detection System")
-    st.markdown("### AI-Powered Skin Disease Detection")
-    st.markdown("---")
-    
-    # Create tabs for login, registration, and password reset
-    tab1, tab2, tab3 = st.tabs(["🔐 Login", "📝 Register", "🔑 Forgot Password"])
-    
-    with tab1:
-        st.subheader("Login to Your Account")
-        
-        # Login form - Only username and password (no role dropdown)
-        with st.form("login_form"):
-            username = st.text_input("Username", 
-                                    placeholder="Enter your username")
-            password = st.text_input("Password", 
-                                   type="password",
-                                   placeholder="Enter your password")
+
+    col_empty, col_toggle = st.columns([8, 1])
+    with col_toggle:
+        theme_label = "☀️ Light Mode" if st.session_state.get("theme", "dark") == "dark" else "🌙 Dark Mode"
+        st.button(theme_label, on_click=toggle_theme, key="login_theme")
+
+    # CSS specifically for the split view login page
+    st.markdown("""
+    <style>
+    .split-left-panel {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        border-radius: 20px;
+        color: white;
+        padding: 4rem 3rem;
+        height: 100%;
+        min-height: 500px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 10px 40px rgba(0,74,153,0.3);
+    }
+    .brand-title { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 2rem; color: white !important; }
+    .brand-subtitle { font-size: 1.25rem; font-weight: 300; opacity: 0.9; line-height: 1.5; color: white !important; }
+    .trust-badges { margin-top: 4rem; opacity: 0.7; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; }
+    .right-panel-header { margin-bottom: 2rem; }
+    .right-panel-header h2 { font-size: 1.8rem; color: var(--text-primary); font-weight: 800; }
+    .right-panel-header p { color: var(--text-secondary); margin-top: 0.5rem; }
+    </style>
+    """, unsafe_allow_html=True)
+
+    # Empty columns for outer margin, making it look centered
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    _, col_main, _ = st.columns([1, 8, 1])
+
+    with col_main:
+        # The main Split Card
+        col_left, col_right = st.columns([1, 1], gap="large")
+
+        with col_left:
+            st.markdown("""
+            <div class="split-left-panel">
+                <div>
+                    <div class="brand-title">🏥 MediScan AI</div>
+                    <div class="brand-subtitle">
+                        Empowering healthcare professionals and patients with enterprise-grade clinical AI diagnostics.
+                    </div>
+                </div>
+                <div class="trust-badges">
+                    Trusted securely by 50+ Top Tier Hospitals
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        with col_right:
+            st.markdown("<br>", unsafe_allow_html=True)
             
-            submit_button = st.form_submit_button("Login")
-            
-            if submit_button:
-                if not username or not password:
-                    st.error("Please enter both username and password.")
-                else:
-                    users = load_users()
-                    if username in users:
-                        user_data = users[username]
-                        if user_data["password"] == password:
-                            # Successful login - get role from JSON
-                            user_role = user_data.get("role", "User")
-                            
-                            # Store in session state
-                            st.session_state["logged_in"] = True
-                            st.session_state["username"] = username
-                            st.session_state["role"] = user_role
-                            st.session_state["email"] = user_data.get("email", "")
-                            
-                            st.success(f"Welcome back, {username}! ({user_role})")
-                            st.rerun()
+            # Use tabs for Login vs Register, similar to standard flow but styled
+            tab1, tab2 = st.tabs(["🔒 Secure Log In", "Create an Account"])
+
+            with tab1:
+                st.markdown("""
+                <div class="right-panel-header">
+                    <h2>Welcome Back</h2>
+                    <p>Please enter your details to access your portal.</p>
+                </div>
+                """, unsafe_allow_html=True)
+
+                role_selection = st.radio("Log in as:", ["Patient", "Doctor"], horizontal=True, label_visibility="collapsed")
+                
+                with st.form("login_form"):
+                    username = st.text_input("Username", placeholder="e.g. user1 or doctor1")
+                    password = st.text_input("Password", type="password", placeholder="••••••••")
+                    submit = st.form_submit_button("Log In →")
+
+                    if submit:
+                        if not username or not password:
+                            st.error("Please fill in all fields.")
                         else:
-                            st.error("Invalid password. Please try again.")
-                    else:
-                        st.error("Username not found. Please check your username or register.")
-    
-    with tab2:
-        st.subheader("Create New Account")
-        st.info("Register as a User to upload skin images and get AI predictions.")
-        
-        with st.form("register_form"):
-            new_username = st.text_input("Choose Username", 
-                                        placeholder="At least 3 characters")
-            new_email = st.text_input("Email Address", 
-                                      placeholder="your@email.com")
-            new_password = st.text_input("Choose Password", 
-                                        type="password",
-                                        placeholder="At least 4 characters")
-            confirm_password = st.text_input("Confirm Password", 
-                                            type="password",
-                                            placeholder="Confirm your password")
-            new_role = st.selectbox("Register as", ["User", "Doctor"],
-                                   help="Doctors can review and approve cases")
-            
-            register_submit = st.form_submit_button("Register")
-            
-            if register_submit:
-                if not new_username or not new_password or not new_email:
-                    st.error("Please fill in all fields.")
-                elif new_password != confirm_password:
-                    st.error("Passwords do not match.")
-                else:
-                    success, message = register_user(new_username, new_password, new_email, new_role)
-                    if success:
-                        st.success(message)
-                    else:
-                        st.error(message)
-    
-    with tab3:
-        st.subheader("Forgot Password")
-        st.warning("Enter your username and new password to reset it.")
-        st.info("Note: For security, you must know your username. Contact admin if you don't remember it.")
-        
-        with st.form("reset_password_form"):
-            reset_username = st.text_input("Username", 
-                                          placeholder="Enter your username")
-            reset_email = st.text_input("Registered Email", 
-                                       placeholder="Enter your registered email")
-            new_password = st.text_input("New Password", 
-                                         type="password",
-                                         placeholder="At least 4 characters")
-            confirm_new_password = st.text_input("Confirm New Password", 
-                                                 type="password",
-                                                 placeholder="Confirm new password")
-            
-            reset_submit = st.form_submit_button("Reset Password")
-            
-            if reset_submit:
-                if not reset_username or not reset_email or not new_password:
-                    st.error("Please fill in all fields.")
-                else:
-                    users = load_users()
+                            users = load_users()
+                            if username in users and users[username]["password"] == password:
+                                user_role = users[username].get("role", "User")
+                                expected_role = "User" if role_selection == "Patient" else "Doctor"
+                                
+                                if user_role != expected_role:
+                                    st.warning(f"This account is registered as a {user_role}, not a {expected_role}.")
+                                else:
+                                    st.session_state["logged_in"] = True
+                                    st.session_state["username"]  = username
+                                    st.session_state["role"]      = user_role
+                                    st.session_state["email"]     = users[username].get("email", "")
+                                    st.rerun()
+                            else:
+                                st.error("Incorrect username or password.")
+                
+                st.markdown("""
+                <div style="margin-top:1.5rem;font-size:0.85rem;color:var(--text-muted);text-align:center;">
+                    <p><strong>Demo Accounts:</strong> <code>user1/123</code> (Patient) | <code>doctor1/123</code> (Doctor)</p>
+                </div>
+                """, unsafe_allow_html=True)
+
+            with tab2:
+                st.markdown("""
+                <div class="right-panel-header">
+                    <h2>Register Account</h2>
+                    <p>Join the MediScan platform.</p>
+                </div>
+                """, unsafe_allow_html=True)
+                
+                with st.form("register_form"):
+                    reg_role = st.radio("I am a:", ["Patient", "Doctor"], horizontal=True)
+                    new_user = st.text_input("Choose Username")
+                    new_email= st.text_input("Email Address")
+                    new_pw   = st.text_input("Choose Password", type="password")
                     
-                    # Verify username exists
-                    if reset_username not in users:
-                        st.error("Username not found. Please check and try again.")
-                    # Verify email matches
-                    elif users[reset_username].get("email", "") != reset_email:
-                        st.error("Email doesn't match our records. Please try again.")
-                    # Verify passwords match
-                    elif new_password != confirm_new_password:
-                        st.error("New passwords do not match.")
-                    else:
-                        success, message = reset_password(reset_username, new_password)
-                        if success:
-                            st.success(message)
-                            st.balloons()
-                        else:
-                            st.error(message)
-    
-    
+                    d_name = d_spec = d_city = d_hosp = ""
+                    if reg_role == "Doctor":
+                        st.markdown("**Doctor Details**")
+                        d_name = st.text_input("Full Name with Title")
+                        d_spec = st.text_input("Specialization")
+                        d_city = st.text_input("Practice City")
+                        d_hosp = st.text_input("Primary Hospital/Clinic")
+
+                    btn = st.form_submit_button("Register Account →")
+                    if btn:
+                        mapped_role = "User" if reg_role == "Patient" else "Doctor"
+                        success, message = register_user(
+                            new_user, new_pw, new_email, mapped_role,
+                            display_name=d_name, specialization=d_spec, city=d_city, hospital=d_hosp
+                        )
+                        if success: st.success(message)
+                        else: st.error(message)
+
 def logout():
-    """
-    Log out the current user by clearing session state.
-    """
-    # Clear all session state variables
     st.session_state["logged_in"] = False
-    st.session_state["username"] = ""
-    st.session_state["role"] = ""
-    st.session_state["email"] = ""
-    
-    st.success("You have been logged out successfully.")
+    st.session_state["username"]  = ""
+    st.session_state["role"]      = ""
+    st.session_state["email"]     = ""
     st.rerun()
 
 def get_current_user():
-    """
-    Get information about the currently logged-in user.
-    
-    Returns:
-        dict or None: User data if logged in, None otherwise
-    """
     if st.session_state.get("logged_in", False):
-        username = st.session_state.get("username", "")
         users = load_users()
-        if username in users:
-            return users[username]
+        return users.get(st.session_state["username"])
     return None
-

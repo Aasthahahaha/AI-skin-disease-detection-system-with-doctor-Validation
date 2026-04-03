@@ -22,5 +22,65 @@
         "role": "Doctor",
         "email": "doctor@exapl.com",
         "created_at": "2026-02-06T13:11:47.593550"
+    },
+    "doctor3": {
+        "password": "123",
+        "role": "Doctor",
+        "email": "doctor3@mediscan.ai",
+        "created_at": "2026-04-02T16:24:00.359226"
+    },
+    "doctor4": {
+        "password": "123",
+        "role": "Doctor",
+        "email": "doctor4@mediscan.ai",
+        "created_at": "2026-04-02T16:24:00.359240"
+    },
+    "doctor5": {
+        "password": "123",
+        "role": "Doctor",
+        "email": "doctor5@mediscan.ai",
+        "created_at": "2026-04-02T16:24:00.359245"
+    },
+    "doctor6": {
+        "password": "123",
+        "role": "Doctor",
+        "email": "doctor6@mediscan.ai",
+        "created_at": "2026-04-02T16:24:00.359249"
+    },
+    "user1": {
+        "password": "1234",
+        "role": "User",
+        "email": "user1@example.com",
+        "created_at": "2026-04-02T16:32:38.461110"
+    },
+    "user1tester1": {
+        "password": "1234123456",
+        "role": "User",
+        "email": "user1@example.comtester@example.com",
+        "created_at": "2026-04-02T16:33:50.926061"
+    },
+    "user2": {
+        "password": "123456",
+        "role": "User",
+        "email": "user2@example.com",
+        "created_at": "2026-04-02T16:35:07.958057"
+    },
+    "doctor1": {
+        "password": "1234",
+        "role": "User",
+        "email": "doc@gmail.com",
+        "created_at": "2026-04-02T16:49:45.842991"
+    },
+    "doctor27": {
+        "password": "1234",
+        "role": "Doctor",
+        "email": "doc@gmail.com",
+        "created_at": "2026-04-02T16:50:44.078675"
+    },
+    "aastha": {
+        "password": "1234",
+        "role": "User",
+        "email": "aastha@gmail.com",
+        "created_at": "2026-04-02T16:51:52.444774"
     }
 }

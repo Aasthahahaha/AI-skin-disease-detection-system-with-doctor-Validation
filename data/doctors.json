@@ -1,0 +1,153 @@
+{
+    "doctor1": {
+        "display_name": "Dr. Anjali Sharma",
+        "specialization": "Dermatology & Skin Disorders",
+        "qualification": "MD Dermatology, MBBS",
+        "experience_years": 12,
+        "location": {
+            "city": "Mumbai",
+            "area": "Bandra West"
+        },
+        "availability": "available",
+        "current_load": 1,
+        "total_cases_handled": 145,
+        "rating": 4.8,
+        "bio": "Expert in inflammatory skin conditions, psoriasis, and cosmetic dermatology with over a decade of clinical experience.",
+        "estimated_response_hours": 4,
+        "languages": [
+            "English",
+            "Hindi",
+            "Marathi"
+        ],
+        "hospital": "Lilavati Hospital, Mumbai"
+    },
+    "doctor2": {
+        "display_name": "Dr. Rajesh Patel",
+        "specialization": "Clinical & Cosmetic Dermatology",
+        "qualification": "DNB Dermatology, MBBS",
+        "experience_years": 9,
+        "location": {
+            "city": "Mumbai",
+            "area": "Andheri East"
+        },
+        "availability": "available",
+        "current_load": 0,
+        "total_cases_handled": 98,
+        "rating": 4.6,
+        "bio": "Specialises in acne, fungal infections, and cosmetic skin procedures. Active researcher in skin microbiome.",
+        "estimated_response_hours": 4,
+        "languages": [
+            "English",
+            "Hindi",
+            "Gujarati"
+        ],
+        "hospital": "Kokilaben Hospital, Mumbai"
+    },
+    "doctor3": {
+        "display_name": "Dr. Priya Gupta",
+        "specialization": "Pediatric & Allergic Dermatology",
+        "qualification": "MD Dermatology, MBBS, FIAD",
+        "experience_years": 14,
+        "location": {
+            "city": "Delhi",
+            "area": "South Delhi"
+        },
+        "availability": "available",
+        "current_load": 0,
+        "total_cases_handled": 210,
+        "rating": 4.9,
+        "bio": "Leading dermatologist specialising in pediatric skin disorders, eczema, and allergic skin diseases.",
+        "estimated_response_hours": 3,
+        "languages": [
+            "English",
+            "Hindi"
+        ],
+        "hospital": "AIIMS Delhi"
+    },
+    "doctor4": {
+        "display_name": "Dr. Arjun Mehta",
+        "specialization": "Cosmetic & Laser Dermatology",
+        "qualification": "MD Dermatology, MBBS, Fellowship Lasers",
+        "experience_years": 8,
+        "location": {
+            "city": "Bangalore",
+            "area": "Indiranagar"
+        },
+        "availability": "available",
+        "current_load": 0,
+        "total_cases_handled": 87,
+        "rating": 4.7,
+        "bio": "Pioneer in laser treatments for skin pigmentation, vitiligo, and rosacea. Consultant at top Bangalore hospitals.",
+        "estimated_response_hours": 4,
+        "languages": [
+            "English",
+            "Hindi",
+            "Kannada"
+        ],
+        "hospital": "Manipal Hospital, Bangalore"
+    },
+    "doctor5": {
+        "display_name": "Dr. Kavitha Nair",
+        "specialization": "General & Tropical Dermatology",
+        "qualification": "MD Dermatology, MBBS, DTM",
+        "experience_years": 16,
+        "location": {
+            "city": "Chennai",
+            "area": "T. Nagar"
+        },
+        "availability": "available",
+        "current_load": 0,
+        "total_cases_handled": 312,
+        "rating": 4.9,
+        "bio": "Renowned expert in tropical skin diseases, fungal infections, and skin cancer screening with 16 years of practice.",
+        "estimated_response_hours": 3,
+        "languages": [
+            "English",
+            "Tamil",
+            "Malayalam"
+        ],
+        "hospital": "Apollo Hospitals, Chennai"
+    },
+    "doctor6": {
+        "display_name": "Dr. Siddharth Rao",
+        "specialization": "Dermatopathology & Skin Cancer",
+        "qualification": "MD Dermatology, MBBS, Fellow Dermatopathology",
+        "experience_years": 11,
+        "location": {
+            "city": "Hyderabad",
+            "area": "Jubilee Hills"
+        },
+        "availability": "available",
+        "current_load": 0,
+        "total_cases_handled": 176,
+        "rating": 4.8,
+        "bio": "Specialist in skin biopsy interpretation, melanoma detection, and advanced dermatopathology.",
+        "estimated_response_hours": 4,
+        "languages": [
+            "English",
+            "Hindi",
+            "Telugu"
+        ],
+        "hospital": "Yashoda Hospital, Hyderabad"
+    },
+    "doctor27": {
+        "display_name": "Dr Ankush",
+        "specialization": "dermatology",
+        "qualification": "MBBS",
+        "experience_years": 0,
+        "location": {
+            "city": "Mumbai",
+            "area": ""
+        },
+        "availability": "available",
+        "current_load": 5,
+        "total_cases_handled": 0,
+        "rating": 4.0,
+        "bio": "Dermatologist",
+        "estimated_response_hours": 4,
+        "languages": [
+            "English"
+        ],
+        "hospital": "City Hospital"
+    }
+}

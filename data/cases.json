@@ -51,5 +51,131 @@
         "doctor_name": "",
         "date": "2026-02-11T10:01:09.041787",
         "status": "pending"
+    },
+    {
+        "user": "aastha",
+        "image": "uploads\\aastha_20260402_170009_istockphoto-972176820-612x612.jpg",
+        "ai_result": "Acne",
+        "confidence": "86.29%",
+        "doctor_verified": false,
+        "doctor_notes": "",
+        "doctor_name": "",
+        "assigned_doctor": "doctor1",
+        "expected_response_by": "2026-04-02T21:00:09.283822",
+        "image_quality": {
+            "width": 612,
+            "height": 408,
+            "file_size_kb": 31.8,
+            "blur_score": 95.4,
+            "brightness": 156.7,
+            "resolution_warning": true
+        },
+        "date": "2026-04-02T17:00:09.289408",
+        "status": "pending"
+    },
+    {
+        "user": "aastha",
+        "image": "uploads\\aastha_20260402_170025_istockphoto-972176820-612x612.jpg",
+        "ai_result": "Vitiligo",
+        "confidence": "79.38%",
+        "doctor_verified": false,
+        "doctor_notes": "",
+        "doctor_name": "",
+        "assigned_doctor": "doctor27",
+        "expected_response_by": "2026-04-02T21:00:25.939179",
+        "image_quality": {
+            "width": 612,
+            "height": 408,
+            "file_size_kb": 31.8,
+            "blur_score": 95.4,
+            "brightness": 156.7,
+            "resolution_warning": true
+        },
+        "date": "2026-04-02T17:00:25.941379",
+        "status": "pending"
+    },
+    {
+        "user": "aastha",
+        "image": "uploads\\aastha_20260402_172820_istockphoto-972176820-612x612.jpg",
+        "ai_result": "Psoriasis",
+        "confidence": "72.02%",
+        "doctor_verified": false,
+        "doctor_notes": "",
+        "doctor_name": "",
+        "assigned_doctor": "doctor27",
+        "expected_response_by": "2026-04-02T21:28:20.068563",
+        "image_quality": {
+            "width": 612,
+            "height": 408,
+            "file_size_kb": 31.8,
+            "blur_score": 95.4,
+            "brightness": 156.7,
+            "resolution_warning": true
+        },
+        "date": "2026-04-02T17:28:20.070853",
+        "status": "pending"
+    },
+    {
+        "user": "aastha",
+        "image": "uploads\\aastha_20260402_172820_istockphoto-972176820-612x612.jpg",
+        "ai_result": "Rosacea",
+        "confidence": "90.62%",
+        "doctor_verified": false,
+        "doctor_notes": "",
+        "doctor_name": "",
+        "assigned_doctor": "doctor27",
+        "expected_response_by": "2026-04-02T21:28:20.569040",
+        "image_quality": {
+            "width": 612,
+            "height": 408,
+            "file_size_kb": 31.8,
+            "blur_score": 95.4,
+            "brightness": 156.7,
+            "resolution_warning": true
+        },
+        "date": "2026-04-02T17:28:20.571379",
+        "status": "pending"
+    },
+    {
+        "user": "aastha",
+        "image": "uploads\\aastha_20260402_172822_istockphoto-972176820-612x612.jpg",
+        "ai_result": "Psoriasis",
+        "confidence": "64.02%",
+        "doctor_verified": false,
+        "doctor_notes": "",
+        "doctor_name": "",
+        "assigned_doctor": "doctor27",
+        "expected_response_by": "2026-04-02T21:28:22.614217",
+        "image_quality": {
+            "width": 612,
+            "height": 408,
+            "file_size_kb": 31.8,
+            "blur_score": 95.4,
+            "brightness": 156.7,
+            "resolution_warning": true
+        },
+        "date": "2026-04-02T17:28:22.616604",
+        "status": "pending"
+    },
+    {
+        "user": "aastha",
+        "image": "uploads\\aastha_20260402_172823_istockphoto-972176820-612x612.jpg",
+        "ai_result": "Hives",
+        "confidence": "93.53%",
+        "doctor_verified": false,
+        "doctor_notes": "",
+        "doctor_name": "",
+        "assigned_doctor": "doctor27",
+        "expected_response_by": "2026-04-02T21:28:23.217758",
+        "image_quality": {
+            "width": 612,
+            "height": 408,
+            "file_size_kb": 31.8,
+            "blur_score": 95.4,
+            "brightness": 156.7,
+            "resolution_warning": true
+        },
+        "date": "2026-04-02T17:28:23.220415",
+        "status": "pending"
     }
 ]
